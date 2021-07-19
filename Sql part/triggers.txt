@@ -1,0 +1,9 @@
+create trigger afterCreateTeam after insert on teams for each row begin insert into studentTeams values(new.enroll,new.teamCode); end#
+
+create trigger afterTeamLeave after delete on studentTeams for each row begin insert into studentTeamsLeave values(old.enroll,old.teamCode,curdate()); end#
+
+create trigger afterDeleteOnTeams after delete on teams for each row begin insert into deletedTeams values(old.enroll,old.teamName,old.noOfMembers,old.projectName,old.subjectCode,old.instructorid,old.teamCode,old.teamLogoName,curdate()); end#
+
+create trigger afterPrjDescPsStatus after update on projectDesc for each row begin if new.PsStatus != old.PsStatus then insert into notification(teamcode,notify,purpose,subjectName) values(OLD.teamCode,NEW.PsStatus,"Status",getTeamCodeToSubject(old.teamCode)); end if; end#
+
+

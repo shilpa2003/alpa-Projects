@@ -1,0 +1,55 @@
+#function to fetch subject name
+create function getSubjectName(sbjCode varchar(20)) 
+returns varchar(100) 
+begin 
+declare sbjName varchar(100) default ""; 
+select subjectName into sbjName from subject where subjectCode=sbjCode; 
+return(sbjName); 
+end#
+
+create function pstStatus(inputCode varchar(20)) 
+returns varchar(1000) 
+begin 
+declare temp varchar(1000) default " "; 
+declare m int; declare st varchar(50); 
+declare sugg varchar(500); 
+select marks into m from projectDesc where teamCode=inputCode; 
+select PsStatus into st from projectDesc where teamCode=inputCode; 
+select suggestion into sugg from projectDesc where teamCode=inputCode; 
+if st != "" then set temp=concat(temp,"Status - ",st,"<br>"); end if; 
+if m != "" then set temp=concat(temp,"Marks - ",m,"<br>"); end if; 
+if sugg != "" then set temp=concat(temp,"Suggestion - ",sugg); 
+end if; 
+if temp != " " then set temp=concat("<span class='text-success'>",temp,"</span>"); 
+return(temp); 
+else return("<span class='text-secondary'>Status - blank  Marks - not added"); 
+end if; end#
+
+create function getCardStatus(tc varchar(20)) 
+returns varchar(50) begin declare temp varchar(150) default ""; 
+declare result varchar(50) default ""; 
+select marks into temp from projectDesc where teamCode=tc; 
+if temp != "0" then set result = "bg-success"; 
+else  
+select PsStatus into temp from projectDesc where teamCode=tc; 
+if temp = "Problem Statement Accepted" then 
+set result = "bg-primary"; 
+else set result = "bg-warning"; 
+end if; 
+select pstmt into temp from projectDesc where teamCode=tc; 
+if temp = "" then 
+set result = " "; end if; 
+end if; 
+return(result); 
+end#
+
+create function getTeamCodeToSubject(inputCode varchar(20)) 
+returns varchar(60) 
+begin 
+declare subjectNm varchar(60); 
+declare temp varchar(20); 
+select subjectCode into temp from teams where teamCode=inputCode; 
+select subjectName into subjectNm from subject where subjectCode=temp; 
+return (subjectNm); 
+end#
+

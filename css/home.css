@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+	/* changing font awesome icon color */
+	   .fa-user-circle-o {
+		color: #4F5450;
+	}
+
+	/* user dropdown list */
+	.profile {
+		display: inline-block;
+		position: relative;
+	}
+
+	#userMenu {
+		display: none;
+		position: absolute;
+		margin-top: 1px;
+        z-index: 1;
+        cursor: pointer;
+	}
+
+	#userMenu a {
+		text-decoration: none;
+		width: 120px;
+		color: #333;
+		background-color: whitesmoke;
+		padding: 5px 10px;
+		display: block;
+		font-size: 16px;
+		border-top-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+	}
+
+	.profile:hover #userMenu {
+		display: block;
+		color: red;
+	
+	}
+
+    #user{
+        cursor: pointer;
+    }
+	.dropdown-item:hover {
+		background-color: #333;
+		color: white;
+	}
+
+	#userMenu a:hover{
+		color:white;
+		background-color:#333;
+    }
+    .card{
+        cursor:pointer;
+	}
+	

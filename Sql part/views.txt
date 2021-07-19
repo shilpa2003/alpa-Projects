@@ -1,0 +1,7 @@
+mysql> create view showDate as select teamCode,prjAssignDate from teams as t,assignPrj as ap where t.subjectCode=ap.subjectCode and t.instructorId=ap.instructorId;
+Query OK, 0 rows affected (0.28 sec)
+
+
+
+mysql> create view displayPrj as select domain,pstmt,abstract,report,prjAssignDate from projectDesc p, showDate d where p.teamcode=d.teamcode order by prjAssignDate;
+Query OK, 0 rows affected (0.51 sec)
